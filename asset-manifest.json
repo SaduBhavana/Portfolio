@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/Portfolio/static/css/main.0ab3269a.css",
-    "main.js": "/Portfolio/static/js/main.b69524c5.js",
+    "main.js": "/Portfolio/static/js/main.ee8d158c.js",
     "static/js/453.a7d99afe.chunk.js": "/Portfolio/static/js/453.a7d99afe.chunk.js",
+    "static/media/ai_image_bhavana_sadu.png": "/Portfolio/static/media/ai_image_bhavana_sadu.2dddfe61eb2efb2cff71.png",
     "index.html": "/Portfolio/index.html",
     "main.0ab3269a.css.map": "/Portfolio/static/css/main.0ab3269a.css.map",
-    "main.b69524c5.js.map": "/Portfolio/static/js/main.b69524c5.js.map",
+    "main.ee8d158c.js.map": "/Portfolio/static/js/main.ee8d158c.js.map",
     "453.a7d99afe.chunk.js.map": "/Portfolio/static/js/453.a7d99afe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0ab3269a.css",
-    "static/js/main.b69524c5.js"
+    "static/js/main.ee8d158c.js"
   ]
 }
