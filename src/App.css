@@ -1,0 +1,57 @@
+.App {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #081127 0%, #02030a 42%, #02040e 100%);
+  color: #eef5ff;
+}
+
+.particle-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1.5rem 1.5rem;
+}
+
+.home {
+  width: min(960px, 100%);
+  background: rgba(10, 18, 40, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 24px 90px rgba(3, 8, 18, 0.36);
+  padding: 3rem 2rem;
+}
+
+.home h1 {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  color: #d4e6ff;
+}
+
+.home p {
+  margin: 1rem 0;
+  color: #c6d4f4;
+  line-height: 1.8;
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 2.5rem 1rem;
+  }
+
+  .home {
+    padding: 2rem 1.25rem;
+  }
+}
