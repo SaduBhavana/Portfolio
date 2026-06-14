@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import aiImage from './ai_image_bhavana_sadu.png';
 
 const HomePage = () => {
@@ -72,7 +74,6 @@ const HomePage = () => {
         const v = videoRef.current;
         if (!v) return;
         if (isMuted) {
-            // Unmute. If the video is paused, request playback so audio is audible.
             v.muted = false;
             const playPromise = v.paused ? v.play() : null;
             if (playPromise && playPromise.catch) {
@@ -89,24 +90,41 @@ const HomePage = () => {
     };
 
     const handleClickPlayWithAudio = (e) => {
-        e.stopPropagation();
+        if (e && e.stopPropagation) e.stopPropagation();
         const v = videoRef.current;
         if (!v) return;
-        // Do not reset playback position; only unmute and request play.
+        setHovering(true);
         v.muted = false;
         setIsMuted(false);
         const p = v.play();
         if (p && p.catch) {
             p.catch(() => {
-                // If browser blocks playback with audio, revert to muted.
                 v.muted = true;
                 setIsMuted(true);
             });
         }
     };
 
+    const [showNotice, setShowNotice] = useState(true);
+
+    const handleCloseNotice = () => {
+        setShowNotice(false);
+    };
+
     return (
         <div>
+            {showNotice && (
+                <div style={{width: '100%', background: 'linear-gradient(90deg, #0f172a, #0b3d91)', color: '#fff', padding: '10px 0', boxShadow: '0 6px 18px rgba(2,6,23,0.12)'}}>
+                    <div style={{maxWidth: 980, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingRight: 12}}>
+                        <div style={{fontSize: 14, paddingLeft: 0}}>
+                            See the AI intro — hover the image to preview and <strong>click the image</strong> to play with sound.
+                        </div>
+                        <div style={{display: 'flex', gap: 8, alignItems: 'center'}}>
+                            <button onClick={(e) => { e.stopPropagation(); handleClickPlayWithAudio(); }} style={{background: 'rgba(255,255,255,0.12)', color: '#fff', border: 'none', padding: '6px 10px', borderRadius: 6, cursor: 'pointer'}}>Play AI intro</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div style={containerStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleClickPlayWithAudio}>
                 <img src={aiImage} alt="Bhavana Sadu" style={imgStyle} />
                 <video
@@ -120,7 +138,6 @@ const HomePage = () => {
                         onPlay={() => setIsPlaying(true)}
                         onPause={() => setIsPlaying(false)}
                 />
-                {/* Small mute/unmute control */}
                 <button
                     aria-label={isMuted ? 'Unmute' : 'Mute'}
                     onClick={toggleAudio}
@@ -134,9 +151,12 @@ const HomePage = () => {
                         borderRadius: 6,
                         padding: '6px 8px',
                         cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                     }}
                 >
-                    {isMuted ? '🔈' : '🔊'}
+                    {isMuted ? <VolumeOffIcon style={{color: '#fff'}} fontSize="small" /> : <VolumeUpIcon style={{color: '#fff'}} fontSize="small" />}
                 </button>
                 
 
