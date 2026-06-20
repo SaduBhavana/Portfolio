@@ -29,8 +29,37 @@ const HomePage = () => {
         return () => document.removeEventListener('pointerdown', handler);
     }, [hovering]);
 
-    const containerStyle = { width: 360, position: 'relative', borderRadius: 8, overflow: 'hidden' };
-    const imgStyle = { width: '100%', height: 'auto', display: 'block' };
+    const heroWrapperStyle = {
+        maxWidth: 1100,
+        margin: '0 auto',
+        padding: '10px',
+        width: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        gap: 32,
+    };
+    const cardWrapperStyle = { width: '100%', maxWidth: 360, flexShrink: 0, paddingTop: 8, alignSelf: 'flex-start' };
+    const heroBannerStyle = {
+        width: '100%',
+        borderRadius: 16,
+        overflow: 'hidden',
+        position: 'relative',
+        boxShadow: '0 0 40px rgba(99,102,241,0.2)',
+        cursor: 'pointer',
+    };
+    const imageStyle = { width: '100%', height: '100%', objectFit: 'cover', display: 'block' };
+    const heroContentStyle = { flex: 1, display: 'flex', flexDirection: 'column', gap: 16, minWidth: 0 };
+    const descriptionStyle = { fontSize: 15, color: '#94a3b8', lineHeight: 1.8, margin: 0, maxWidth: '100%' };
+    const statsWrapperStyle = { display: 'flex', gap: 0, flexWrap: 'wrap', marginTop: 16, paddingTop: 24, borderTop: '1px solid rgba(99,102,241,0.12)' };
+    const statsItemStyle = (i) => ({
+        flex: '1 1 120px',
+        minWidth: 120,
+        paddingRight: i === 0 ? 0 : 32,
+        paddingLeft: i === 0 ? 0 : 32,
+        borderLeft: i === 0 ? 'none' : '1px solid rgba(99,102,241,0.12)',
+    });
     const videoStyle = {
         position: 'absolute',
         top: 0,
@@ -196,22 +225,15 @@ const HomePage = () => {
                 </div>
             )}
 
-            <div style={{
-                maxWidth: 1100,
-                margin: '0 auto',
-                padding: '10px',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 40,
-            }}>
-                <div style={{ flexShrink: 0, paddingTop: 8 }}>
+            <div style={heroWrapperStyle}>
+                <div style={cardWrapperStyle}>
                     <div
-                        style={{ width: 320, borderRadius: 16, overflow: 'hidden', position: 'relative', boxShadow: '0 0 40px rgba(99,102,241,0.2)' }}
+                        style={heroBannerStyle}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                         onClick={handleClickPlayWithAudio}
                     >
-                        <img src={aiImage} alt="Bhavana Sadu" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                        <img src={aiImage} alt="Bhavana Sadu" style={imageStyle} />
                         <video
                             ref={videoRef}
                             src={videoSrc}
@@ -230,7 +252,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div style={heroContentStyle}>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <div style={{ width: 28, height: 1, background: '#06b6d4' }} />
@@ -279,7 +301,7 @@ const HomePage = () => {
 
                     <div style={{ width: 48, height: 2, background: 'linear-gradient(90deg, #6366f1, #06b6d4)', borderRadius: 2 }} />
 
-                    <p style={{ fontSize: 15, color: '#94a3b8', lineHeight: 1.8, margin: 0, maxWidth: 520 }}>
+                    <p style={descriptionStyle}>
                         Software Engineer with experience in developing reliable software solutions and solving real-world problems.
                         Passionate about <span style={{ color: '#c7d2fe', fontWeight: 500 }}>AI</span>,{' '}
                         <span style={{ color: '#c7d2fe', fontWeight: 500 }}>Machine Learning</span>, and building innovative
@@ -304,15 +326,15 @@ const HomePage = () => {
                         </button>
                     </div>
 
-                    <div style={{ display: 'flex', gap: 0, marginTop: 16, paddingTop: 24, borderTop: '1px solid rgba(99,102,241,0.12)' }}>
+                    <div style={statsWrapperStyle}>
                         {[
                             { num: '2+', label: 'Years exp' },
                             { num: '10+', label: 'Projects' },
                             { num: '8+', label: 'Tech stacks' },
                         ].map((s, i) => (
-                            <div key={i} style={{ paddingRight: 32, paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? 'none' : '1px solid rgba(99,102,241,0.12)' }}>
+                            <div key={i} style={statsItemStyle(i)}>
                                 <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 22, fontWeight: 500, color: '#f1f5f9' }}>
-                                    {s.num} <span style={{ color: '#818cf8' }}></span>
+                                    {s.num}
                                 </div>
                                 <div style={{ fontSize: 11, color: '#475569', marginTop: 2, letterSpacing: '0.04em' }}>{s.label}</div>
                             </div>
